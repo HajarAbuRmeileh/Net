@@ -80,7 +80,8 @@ jobs:
           manifests: |
             kubernetes/deploy.yml
           images: |
-            hajaraburmeileh/simplecalc:${{ github.sha }}
+            jtamimi/password-generator:latest
+    #hajaraburmeileh/simplecalc:${{ github.sha }}
     
    
 
