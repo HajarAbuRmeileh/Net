@@ -26,3 +26,21 @@ jobs:
       run: dotnet build --no-restore
     - name: Test
       run: dotnet test --no-build --verbosity normal
+  
+  docker:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    - name: Login to Docker Hub
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+    - name: Build Docker image
+      run: docker build -t hajaraburmeileh/simplecalc:${{ github.sha }} -t hajaraburmeileh/simplecalc:latest .
+    - name: Publish Docker image
+      run: docker push hajaraburmeileh/simplecalc --all-tags
+    
+   
+
