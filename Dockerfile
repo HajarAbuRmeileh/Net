@@ -1,21 +1,15 @@
-FROM mcr.microsoft.com/dotnet/sdk:7.0 AS builder
-WORKDIR /app
+FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build-env
+WORKDIR /Cahtbot
 
-# caches restore result by copying csproj file separately
-COPY *.csproj .
+# Copy everything
+COPY . ./
+# Restore as distinct layers
 RUN dotnet restore
+# Build and publish a release
+RUN dotnet publish -c Release -o out
 
-COPY . .
-RUN dotnet publish --output /app/ --configuration Release --no-restore
-RUN sed -n 's:.*<AssemblyName>\(.*\)</AssemblyName>.*:\1:p' *.csproj > __assemblyname
-RUN if [ ! -s __assemblyname ]; then filename=$(ls *.csproj); echo ${filename%.*} > __assemblyname; fi
-
-# Stage 2
+# Build runtime image
 FROM mcr.microsoft.com/dotnet/aspnet:7.0
-WORKDIR /app
-COPY --from=builder /app .
-
-ENV PORT 5000
-EXPOSE 5000
-
-ENTRYPOINT dotnet $(cat /app/__assemblyname).dll --urls "http://*:5000"
+WORKDIR /Cahtbot
+COPY --from=build-env /Cahtbot/out .
+ENTRYPOINT ["dotnet", "Cahtbot.dll"]
