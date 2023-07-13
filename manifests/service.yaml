@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: Net
+  namespace: namespace-workflow-1689263050570
+spec:
+  type: LoadBalancer
+  selector:
+    app: Net
+  ports:
+    - protocol: TCP
+      port: 5000
+      targetPort: 5000
