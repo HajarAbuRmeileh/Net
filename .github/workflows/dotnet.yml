@@ -77,7 +77,7 @@ jobs:
           manifests: |
             kubernetes/deploy.yml
           images: |
-          hajaraburmeileh/asp-api
+            hajaraburmeileh/asp-api:${{ github.sha }}
 
 
 #hajaraburmeileh/simplecalc:${{ github.sha }}
