@@ -1,22 +1,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx
+  name: helloppucluster
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: nginx
+      app: helloppucluster
+
   template:
     metadata:
       labels:
-        app: nginx
+        app: helloppucluster
     spec:
       nodeSelector:
         "kubernetes.io/os": linux
       containers:
-      - name: nginx
-        image: hajaraburmeileh/simplecalc:latest
+      - name: helloppucluster
+        image: hajaraburmeileh/asp-api:latest
+
         ports:
         - containerPort: 8080
         resources:
@@ -32,10 +34,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: nginx
+  name: helloppucluster
 spec:
   type: LoadBalancer
   ports:
   - port: 8080
   selector:
-    app: nginx
+    app: simplecalccluser

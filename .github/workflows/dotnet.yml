@@ -40,17 +40,17 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
     - name: Build Docker image
-      run: docker build -t hajaraburmeileh/simplecalc:${{ github.sha }} -t hajaraburmeileh/simplecalc:latest .
+      run: docker build -t hajaraburmeileh/asp-api:${{ github.sha }} -t hajaraburmeileh/asp-api:latest .
     - name: Publish Docker image
-      run: docker push hajaraburmeileh/simplecalc --all-tags
+      run: docker push hajaraburmeileh/asp-api --all-tags
 
   azure:
     runs-on: ubuntu-latest
-    needs: docker
     env:
       env-file: my-environment-file.env
-      CLUSTER_NAME: simplecalccluser
-      RESOURSE_GROUP: hajarscalc    
+      CLUSTER_NAME: helloppucluster
+      RESOURSE_GROUP: hajarhello
+   
     
     steps:
 
@@ -77,7 +77,10 @@ jobs:
           manifests: |
             kubernetes/deploy.yml
           images: |
-            hajaraburmeileh/simplecalc:${{ github.sha }}
+          hajaraburmeileh/asp-api
+
+
+#hajaraburmeileh/simplecalc:${{ github.sha }}
     
    
 

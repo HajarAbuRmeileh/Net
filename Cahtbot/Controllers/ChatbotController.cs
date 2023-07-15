@@ -37,7 +37,7 @@ namespace Cahtbot.Controllers
         {
             
             // Call the Python chatbot API
-            var pythonApiUrl = "http://127.0.0.1:8000/polls";
+            var pythonApiUrl = "https://chatbotpythondjango.azurewebsites.net/";
             var response = await _httpClient.GetAsync($"{pythonApiUrl}?userMessage={userMessage}");
 
             if (response.IsSuccessStatusCode)
