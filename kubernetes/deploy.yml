@@ -40,4 +40,4 @@ spec:
   ports:
   - port: 8080
   selector:
-    app: simplecalccluser
+    app: helloppucluster
