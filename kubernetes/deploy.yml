@@ -3,7 +3,8 @@ kind: Deployment
 metadata:
   name: helloppucluster
 spec:
-  replicas: 1
+  progressDeadlineSeconds: 600
+  replicas: 2
   selector:
     matchLabels:
       app: helloppucluster
