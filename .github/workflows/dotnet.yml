@@ -46,6 +46,7 @@ jobs:
 
   azure:
     runs-on: ubuntu-latest
+    needs: docker
     env:
       env-file: my-environment-file.env
       CLUSTER_NAME: helloppucluster
