@@ -81,7 +81,7 @@ jobs:
             hajaraburmeileh/asp-api:${{ github.sha }}
 
 
-#hajaraburmeileh/simplecalc:${{ github.sha }}
+
     
    
 
